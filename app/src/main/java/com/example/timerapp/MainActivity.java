@@ -19,15 +19,21 @@ public class MainActivity extends AppCompatActivity {
     MediaPlayer mediaPlayer;String secondstring; SeekBar seekBar;int time=0;
 
 
-            Button button2;CountDownTimer countDownTimer;Boolean counteractive=false;
+            Button button2,button3;CountDownTimer countDownTimer;Boolean counteractive=false;
 
     TextView textView;
 
 
         public  void Click(View view){
+                if(counteractive){
+                    counteractive=false;
 
+                    button2.setText("Start");
+                    countDownTimer.cancel();
+                    seekBar.setEnabled(true);
+                }
 
-
+                else{
                 counteractive=true;
                 button2.setText("Stop");
                 seekBar.setEnabled(false);
@@ -35,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onTick(long millisUntilFinished) {
                     update((int) millisUntilFinished/1000);
-
+                    button3.setVisibility(View.VISIBLE);
 
                 }
 
@@ -52,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        }
+        }}
 
         public void update(int getseconds){
 
@@ -67,7 +73,15 @@ public class MainActivity extends AppCompatActivity {
             textView.setText("0"+Integer.toString(minutes)+":"+ secondstring);}
 
 
+        public  void reset(View view){
+            counteractive=false;
+            textView.setText("00:30");
+            button2.setText("Start");
+            countDownTimer.cancel();
+            seekBar.setEnabled(true);
+            mediaPlayer.reset();
 
+        }
 
 
 
@@ -78,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
          mediaPlayer = MediaPlayer.create(this, R.raw.alarmbeep);
 
             button2=findViewById(R.id.button2);
-
+            button3=findViewById(R.id.button3);
          textView=findViewById(R.id.textView3);
          seekBar =findViewById(R.id.seekBar);
         seekBar.setMax(500);
