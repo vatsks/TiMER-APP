@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    MediaPlayer mediaPlayer;String secondstring; SeekBar seekBar;int time=0;
+    MediaPlayer mediaPlayer,mediaPlayer2;String secondstring; SeekBar seekBar;
 
 
             Button button2,button3;CountDownTimer countDownTimer;Boolean counteractive=false;
@@ -43,12 +43,13 @@ public class MainActivity extends AppCompatActivity {
                     update((int) millisUntilFinished/1000);
                     button3.setVisibility(View.VISIBLE);
 
+
                 }
 
                 @Override
                 public void onFinish() {
 
-                    mediaPlayer.start();
+                    mediaPlayer.start();mediaPlayer2.pause();
 
 
                 }
@@ -80,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
             countDownTimer.cancel();
             seekBar.setEnabled(true);
             mediaPlayer.reset();
+            mediaPlayer2.reset();
 
         }
 
@@ -90,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
          mediaPlayer = MediaPlayer.create(this, R.raw.alarmbeep);
+         mediaPlayer2=MediaPlayer.create(this,R.raw.alarmprogress);
 
             button2=findViewById(R.id.button2);
             button3=findViewById(R.id.button3);
