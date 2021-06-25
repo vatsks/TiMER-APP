@@ -22,6 +22,20 @@ public class MainActivity extends AppCompatActivity {
 
         public  void Click(View view){
 
+            CountDownTimer countDownTimer=new CountDownTimer(seekBar.getProgress()*1000,1000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    update((int) millisUntilFinished/1000);
+
+                }
+
+                @Override
+                public void onFinish() {
+
+                    mediaPlayer.start();
+                }
+            };
+
             countDownTimer.start();
 
 
